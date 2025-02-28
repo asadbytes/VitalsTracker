@@ -1,4 +1,4 @@
-﻿Markdown
+Markdown
 
 # Vitals Tracker with Reminders
 
