@@ -25,7 +25,7 @@ class VitalsApplication : Application() {
     private fun scheduleReminderWork() {
         val reminderWorkRequest = PeriodicWorkRequest.Builder(
             VialsReminderWorker::class.java,
-            5, TimeUnit.SECONDS
+            5, TimeUnit.HOURS
         ).build()
 
         WorkManager.getInstance(this).enqueue(reminderWorkRequest)

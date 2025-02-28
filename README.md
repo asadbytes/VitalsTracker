@@ -1,5 +1,3 @@
-Markdown
-
 # Vitals Tracker with Reminders
 
 [![GitHub issues](https://img.shields.io/github/issues/oneasad/vitalstracker)](https://github.com/oneasad/vitalstracker/issues)
