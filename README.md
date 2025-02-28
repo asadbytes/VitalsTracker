@@ -1,4 +1,5 @@
 ﻿Markdown
+
 # Vitals Tracker with Reminders
 
 [![GitHub issues](https://img.shields.io/github/issues/oneasad/vitalstracker)](https://github.com/oneasad/vitalstracker/issues)
@@ -11,29 +12,32 @@ Vitals Tracker is a modern Android application built with Jetpack Compose, desig
 
 ## ✨ Key Features
 
--   **Comprehensive Tracking:**
-    -   Log your weight, kicks, blood pressure, heart rate and time.
--   **User-Friendly Interface:** Built with Jetpack Compose for a smooth and responsive experience.
--   **Clean Architecture:** Structured for maintainability and scalability, using a layered approach.
--   **Offline Data Storage:** Utilizes Room database for reliable local data storage.
--   **Modern UI:** Implemented with Material3 for a contemporary and consistent design.
+- **Comprehensive Tracking:**
+  - Log your weight, kicks, blood pressure, heart rate and time.
+- **User-Friendly Interface:** Built with Jetpack Compose for a smooth and responsive experience.
+- **Clean Architecture:** Structured for maintainability and scalability, using a layered approach.
+- **Offline Data Storage:** Utilizes Room database for reliable local data storage.
+- **Modern UI:** Implemented with Material3 for a contemporary and consistent design.
 
 ## 🚀 Technologies Used
 
--   **Kotlin:** The expressive and concise language for Android development.
--   **Jetpack Compose:** Android's modern toolkit for building native UI.
--   **ViewModel:** Manages UI-related data with lifecycle awareness.
--   **StateFlow:** Reactive streams for managing and observing state changes.
--   **Room Persistence Library:** For robust and efficient local data storage.
+- **Kotlin:** The expressive and concise language for Android development.
+- **Jetpack Compose:** Android's modern toolkit for building native UI.
+- **ViewModel:** Manages UI-related data with lifecycle awareness.
+- **StateFlow:** Reactive streams for managing and observing state changes.
+- **Jetpack compose Navigation:** Modern and latest way of navigation with jetpack compose.
+- **Koin dependency Management:** Management and dependency injection by koin.
+- **Room Persistence Library:** For robust and efficient local data storage.
 
 ## 🏗️ Clean Architecture
 
 This project adheres to Clean Architecture principles, ensuring a separation of concerns and maintainability:
 
--   **Presentation Layer:** Contains UI components, ViewModels, and UI logic.
--   **Data Layer:** Handles data retrieval and storage, including repositories and data sources.
+- **Presentation Layer:** Contains UI components, ViewModels, and UI logic.
+- **Data Layer:** Handles data retrieval and storage, including repositories and data sources.
 
 ## 📂 Project Structure
+
 ```
 app/
 ├── src/
@@ -44,6 +48,7 @@ app/
 │ │ │ │ ├── local/VitalsDatabase.kt
 │ │ │ │ ├── model/Vital.kt
 │ │ │ │ ├── repository/VitalsRepository.kt
+│ │ │ ├── di/AppModule
 │ │ │ ├── presentation/ # Presentation layer: UI, ViewModels
 │ │ │ │ ├── screens/VitalsInputScreen.kt
 │ │ │ │ ├── screens/VitalsLogScreen.kt
@@ -67,6 +72,8 @@ app/
 
 ## 🏁 Getting Started
 
+To use this app directly on your phone, download the app-debug.apk file ( located in the main directory ) and install in your android phone.
+OR
 Follow these steps to run the project locally:
 
 1.  **Clone the repository:**
@@ -76,11 +83,12 @@ Follow these steps to run the project locally:
     ```
 
 2.  **Open the project in Android Studio:**
-    -   Navigate to `File` -> `Open...` and select the cloned project directory.
+
+    - Navigate to `File` -> `Open...` and select the cloned project directory.
 
 3.  **Build and run:**
-    -   Connect an Android emulator or a physical device.
-    -   Click the "Run" button in Android Studio.
+    - Connect an Android emulator or a physical device.
+    - Click the "Run" button in Android Studio.
 
 ## 🤝 Contributing
 

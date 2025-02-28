@@ -4,13 +4,20 @@ import android.annotation.SuppressLint
 import android.app.Application
 import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
+import com.oneasad.vitalstracker.di.appModule
 import java.util.concurrent.TimeUnit
 import com.oneasad.vitalstracker.presentation.worker.VialsReminderWorker
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 
 class VitalsApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        startKoin {
+            androidContext(this@VitalsApplication)
+            modules(appModule)
+        }
         scheduleReminderWork()
     }
 

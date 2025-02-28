@@ -17,8 +17,8 @@ interface VitalsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(posts: List<Vital>)
 
-    @Query("SELECT * FROM vitals WHERE vitalRecordId = :id ORDER BY createdAt DESC")
-    fun getVitalById(id: Int): Flow<List<Vital>>
+    @Query("SELECT * FROM vitals WHERE vitalRecordId = :id")
+    suspend fun getVitalById(id: Int): Vital?
 
     @Query("SELECT * FROM vitals ORDER BY createdAt DESC")
     fun getAllVitals(): Flow<List<Vital>>
