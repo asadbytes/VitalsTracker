@@ -72,7 +72,7 @@ app/
 
 ## 🏁 Getting Started
 
-To use this app directly on your phone, [download the app-debug.apk](./app-debug.apk) file ( located in the main directory ) and install in your android phone.
+To use this app directly on your phone, [download the app-debug.apk](app-debug.apk) file ( located in the main directory ) and install in your android phone.
 OR
 Follow these steps to run the project locally:
 
