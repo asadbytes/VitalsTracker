@@ -59,7 +59,7 @@ fun VitalsAlertDialog(
                                     diastolic = diastolic,
                                     heartRate = heartRate,
                                     weight = weight,
-                                    babyKicks = babyKicks
+                                    steps = babyKicks
                                 )
                             )
                             onDismiss()

@@ -106,7 +106,7 @@ fun VitalsInputScreen(
         OutlinedTextField(
             value = bk,
             onValueChange = onBkChange,
-            label = { Text("Baby Kicks") },
+            label = { Text("Steps") },
             maxLines = 1,
             singleLine = true,
             keyboardOptions = KeyboardOptions.Default.copy(

@@ -22,6 +22,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.oneasad.vitalstracker.data.model.Vital
+import com.oneasad.vitalstracker.ui.theme.lavenderDark
 import com.oneasad.vitalstracker.ui.theme.VitalsTrackerTheme
 
 @Composable
@@ -42,7 +43,7 @@ fun VitalsEditScreen(
         dia = vital.diastolic.toString()
         hr = vital.heartRate.toString()
         wt = vital.weight.toString()
-        bk = vital.babyKicks.toString()
+        bk = vital.steps.toString()
     }
 
     Column(
@@ -76,18 +77,18 @@ fun VitalsEditScreen(
                         diastolic = dia.toIntOrNull() ?: 0,
                         heartRate = hr.toIntOrNull() ?: 0,
                         weight = wt.toFloatOrNull() ?: 0f,
-                        babyKicks = bk.toIntOrNull() ?: 0,
+                        steps = bk.toIntOrNull() ?: 0,
                     )
                     onUpdate(updatedVital)
                 },
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF9C4DB9))
+                colors = ButtonDefaults.buttonColors(containerColor = lavenderDark)
             ) {
                 Text("Update", color = Color.White)
             }
 
             Button(
                 onClick = { onDelete(vital) },
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF9C4DB9))
+                colors = ButtonDefaults.buttonColors(containerColor = lavenderDark)
             ) {
                 Text("Delete", color = Color.White)
             }
@@ -106,7 +107,7 @@ private fun VitalsEditPreview() {
                 diastolic = 80,
                 heartRate = 70,
                 weight = 50f,
-                babyKicks = 2
+                steps = 2
             ),
             onUpdate = {},
             onDelete = {}

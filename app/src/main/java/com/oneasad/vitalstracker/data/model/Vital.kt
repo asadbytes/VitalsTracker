@@ -11,6 +11,6 @@ data class Vital (
     val diastolic: Int,
     val heartRate: Int,
     val weight: Float,
-    val babyKicks: Int,
+    val steps: Int,
     val createdAt: Date = Date()
 )

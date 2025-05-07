@@ -5,10 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.oneasad.vitalstracker.data.model.Vital
 import com.oneasad.vitalstracker.data.repository.VitalsRepository
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 class VitalsViewModel(
     private val repository: VitalsRepository
@@ -28,13 +26,13 @@ class VitalsViewModel(
                     diastolic = vital.diastolic,
                     heartRate = vital.heartRate,
                     weight = vital.weight,
-                    babyKicks = vital.babyKicks
+                    steps = vital.steps
                 ))
         }
     }
 
-    fun getVitalById(id: Int): Vital? {
-        return runBlocking { repository.getVitalById(id) }
+    suspend fun getVitalByIdSuspend(id: Int): Vital? {
+        return repository.getVitalById(id)
     }
 
     fun updateVital(vital: Vital) {
@@ -45,9 +43,15 @@ class VitalsViewModel(
 
     fun deleteVital(vital: Vital) {
         viewModelScope.launch {
-            repository.deleteVital(vital)
+            val currentList = vitals.value
+            if (currentList.size == 1) {
+                repository.deleteAll()
+            } else {
+                repository.deleteVital(vital)
+            }
         }
     }
+
 
     fun deleteAllVitals() {
         viewModelScope.launch {

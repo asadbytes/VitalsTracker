@@ -30,6 +30,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.oneasad.vitalstracker.R
 import com.oneasad.vitalstracker.data.model.Vital
+import com.oneasad.vitalstracker.ui.theme.lavender
+import com.oneasad.vitalstracker.ui.theme.lavenderDark
 import com.oneasad.vitalstracker.ui.theme.VitalsTrackerTheme
 import com.oneasad.vitalstracker.utils.dateFormatter
 import java.text.SimpleDateFormat
@@ -57,7 +59,7 @@ fun VitalCard(
             Column(
                 verticalArrangement = Arrangement.Center,
                 modifier = Modifier
-                    .background(Color(0xFFEBB9FE))
+                    .background(lavender)
                     .weight(1f)
                     .padding(16.dp)
             ) {
@@ -66,7 +68,7 @@ fun VitalCard(
                         DataCompEntity(R.drawable.heart_rate, "${vital.heartRate} bpm"),
                         DataCompEntity(R.drawable.blood_pressure, "${vital.systolic}/${vital.diastolic} mmHg"),
                         DataCompEntity(R.drawable.scale, "${vital.weight} kg"),
-                        DataCompEntity(R.drawable.kick, "${vital.babyKicks} kicks")
+                        DataCompEntity(R.drawable.kick, "${vital.steps} steps")
                     )
                 )
             }
@@ -74,7 +76,7 @@ fun VitalCard(
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(0.2f)
-                    .background(Color(0xFF9C4DB9))
+                    .background(lavenderDark)
                     .padding(horizontal = 16.dp, vertical = 8.dp),
                 horizontalArrangement = Arrangement.End
             ) {
@@ -114,14 +116,14 @@ fun DataComp(
         Icon(
             painter = painterResource(icon),
             contentDescription = null,
-            tint = Color(0xFF3F0A71),
+            tint = lavenderDark,
             modifier = Modifier.size(24.dp)
         )
         Spacer(modifier = Modifier.width(12.dp))
         Text(
             text = text,
             fontWeight = FontWeight.Bold,
-            color = Color(0xFF3F0A71),
+            color = lavenderDark,
             fontSize = 16.sp,
             maxLines = 1,
         )
@@ -154,7 +156,7 @@ private fun VitalCardPreview() {
                     heartRate = 70,
                     weight = 50f,
                     vitalRecordId = 1,
-                    babyKicks = 1,
+                    steps = 1,
                     createdAt = createdAt,
                 )
             )

@@ -1,5 +1,7 @@
 package com.oneasad.vitalstracker.presentation.screens
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -8,6 +10,7 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -25,6 +28,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -34,11 +38,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.oneasad.vitalstracker.data.model.Vital
 import com.oneasad.vitalstracker.presentation.screens.components.VitalsAlertDialog
 import com.oneasad.vitalstracker.presentation.viewmodel.VitalsViewModel
-import org.koin.androidx.compose.getViewModel
+import com.oneasad.vitalstracker.ui.theme.lavender
+import com.oneasad.vitalstracker.ui.theme.lavenderDark
 import org.koin.androidx.compose.koinViewModel
-import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -75,14 +80,14 @@ fun VitalsApp(modifier: Modifier = Modifier) {
                            Icon(
                                imageVector = Icons.Default.Delete,
                                contentDescription = "Delete All",
-                               tint = Color(0xFF9C4DB9)
+                               tint = lavenderDark
                            )
                        }
                    }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color(0xFFEBB9FE),
-                    titleContentColor = Color(0xFF9C4DB9)
+                    containerColor = lavender,
+                    titleContentColor = lavenderDark
                 )
             )
         },
@@ -91,7 +96,7 @@ fun VitalsApp(modifier: Modifier = Modifier) {
                 FloatingActionButton(
                     onClick = { showDialog = true },
                     shape = RoundedCornerShape(100),
-                    containerColor = Color(0xFF9C4DB9),
+                    containerColor = lavenderDark,
                     modifier = Modifier.padding(bottom = 20.dp)
                 ) {
                     Icon(
@@ -122,26 +127,31 @@ fun VitalsApp(modifier: Modifier = Modifier) {
                 route = "edit/{vitalId}",
                 arguments = listOf(navArgument("vitalId") { type = NavType.IntType })
             ) { backStackEntry ->
-                val vitalId = backStackEntry.arguments?.getInt("vitalId")
-                val vital = viewModel.getVitalById(vitalId!!)
+                val vitalId = backStackEntry.arguments?.getInt("vitalId") ?: return@composable
+
+                var vital by remember { mutableStateOf<Vital?>(null) }
+
+                LaunchedEffect(vitalId) {
+                    vital = viewModel.getVitalByIdSuspend(vitalId)
+                }
+
                 if (vital != null) {
                     VitalsEditScreen(
-                        vital = vital,
+                        vital = vital!!,
                         onUpdate = { updatedVital ->
                             viewModel.updateVital(updatedVital)
                             navController.popBackStack()
                         },
                         onDelete = {
-                            viewModel.deleteVital(vital)
+                            viewModel.deleteVital(vital!!)
                             navController.popBackStack()
                         },
                         modifier = Modifier.padding(padding)
                     )
                 } else {
-                    LaunchedEffect(Unit) {
-                        navController.popBackStack()
+                    Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                        CircularProgressIndicator()
                     }
-                    Text("Vital not found", style = MaterialTheme.typography.titleLarge)
                 }
             }
         }
@@ -160,7 +170,7 @@ fun VitalsApp(modifier: Modifier = Modifier) {
                         viewModel.deleteAllVitals()
                         deleteDialog = false
                     },
-                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF9C4DB9))
+                    colors = ButtonDefaults.buttonColors(containerColor = lavenderDark)
                 ) {
                     Text("Delete All", color = Color.White)
                 }
@@ -169,7 +179,7 @@ fun VitalsApp(modifier: Modifier = Modifier) {
                 Button(
                     onClick = { deleteDialog = false },
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFF9C4DB9),
+                        containerColor = lavenderDark,
                         contentColor = Color.White
                     )
                 ) {
